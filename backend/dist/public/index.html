@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <link href="public/style.css" rel="stylesheet" type="text/css" />
+    <link href="public/jsonviewer.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <main>
+      <form id="form">
+        <div class="inner-form">
+          <div class="banner__warning">Error: Please select a file first!</div>
+          <p class="desc">
+            Upload an Excel file to get information regarding it's merged cells.
+          </p>
+          <div>
+            <label>File:</label>
+            <input
+              type="file"
+              accept=".xls,.xlsx,application/vnd.ms-excel"
+              id="uploadFile"
+              name="file"
+            />
+          </div>
+          <button id="btnSubmit">Upload</button>
+        </div>
+      </form>
+      <!-- XSLX: Results -->
+      <div id="results">
+      </div>
+    </main>
+    <script src="public/app.js"></script>
+    <script src="public/jsonviewer.js"></script>
+  </body>
+</html>

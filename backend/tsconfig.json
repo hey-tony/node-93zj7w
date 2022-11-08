@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "target": "ESNext",
+    "module": "CommonJS",
+    "strict": true,
+    "outDir": "dist",
+    "declaration": true,
+    "declarationDir": "dist",
+    "paths": {
+      "@/*": ["./*"],
+      "@common/*": ["common/*"]
+    }
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
+}

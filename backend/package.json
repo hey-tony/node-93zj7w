@@ -1,0 +1,36 @@
+{
+  "name": "coding-test-app",
+  "version": "0.0.1",
+  "description": "Take home exercise.",
+  "main": "dist/app/index.js",
+  "scripts": {
+    "clean": "rimraf 'dist/*' && mkdir dist/public && cd ../frontend/ && npm run build",
+    "lint": "eslint .",
+    "build": "cd lib/xlsx_parser && npm run build && cd - && tsc --project tsconfig.json",
+    "start:dev": "npm run clean && npm run build && concurrently \"tsc --project tsconfig.json -w\" \"nodemon dist/server/index.js\"",
+    "start": "npm run build && npm run serve",
+    "serve": "node dist/server/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "comments": "echo Note: pre,post hooks sometimes fail on stackblitz"
+  },
+  "author": "Anthony Bailey",
+  "license": "ISC",
+  "dependencies": {
+    "xlsx_parser": "file:lib/xlsx_parser"
+  },
+  "devDependencies": {
+    "@hapi/hapi": "^20.2.2",
+    "@hapi/inert": "^7.0.0",
+    "@types/hapi__hapi": "^20.0.13",
+    "@types/hapi__inert": "^5.2.3",
+    "@types/node": "^18.11.8",
+    "@typescript-eslint/eslint-plugin": "^5.42.0",
+    "@typescript-eslint/parser": "^5.42.0",
+    "concurrently": "^7.5.0",
+    "eslint": "^8.26.0",
+    "nodemon": "^2.0.20",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.8.4",
+    "yargs": "^17.6.0"
+  }
+}

@@ -1,0 +1,11 @@
+{
+  "name": "frontend",
+  "version": "0.0.1",
+  "description": "Very simple barebones form upload.",
+  "scripts": {
+    "build": "copyfiles -f lib/**/* src/* ../backend/dist/public"
+  },
+  "devDependencies": {
+    "copyfiles": "^2.4.1"
+  }
+}
