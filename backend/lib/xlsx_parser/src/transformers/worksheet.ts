@@ -66,8 +66,8 @@ export class WorksheetTransformer extends XlsxTransformer {
                     const cell = new Cell( refId );
                     const width = cols[ cell.colNum ] ?? sheetFormatPr.defaultColWidth;
                     cell.content = this.getCellContent( item );
-                    cell.height = height;
-                    cell.width = width;
+                    cell.height = parseFloat(height);
+                    cell.width = parseFloat(width);
                     return cell;
                 });
                 return cells;

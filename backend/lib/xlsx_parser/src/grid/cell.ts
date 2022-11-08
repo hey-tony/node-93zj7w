@@ -19,8 +19,8 @@ export class Cell {
     colNum = 0;
     colLetter = '';
     content: string|number = '';
-    height = null;
-    width = null;
+    height: number|null = null;
+    width: number|null = null;
     
     /**
      * Constructs Cell instance from cell letter

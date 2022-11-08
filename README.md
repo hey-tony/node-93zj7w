@@ -27,7 +27,10 @@ This is a npm module that I wrote that will take in an XLSX file stream and retu
 
 This was meant to be a reusable package consumable by both Hapi server and CLI app. I wrote it to use Node pipes so that adding extract features/ functionality would be very simple. (i.e, file validation)
 
-## /backend/app
+I wanted to write my own instead of pulling in a library, exception being parsing of XLSX file. While I looked into XML file structure and started a prototype, I opted to use `Unzipper`.
+
+
+## /backend/app/index.ts
 The CLI portion of the test.
 
 ## /backend/server and /frontend

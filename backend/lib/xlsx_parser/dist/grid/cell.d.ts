@@ -15,8 +15,8 @@ export declare class Cell {
     colNum: number;
     colLetter: string;
     content: string | number;
-    height: null;
-    width: null;
+    height: number | null;
+    width: number | null;
     /**
      * Constructs Cell instance from cell letter
      * @param {string} cellLetter - Cell letter, i.e, A3
