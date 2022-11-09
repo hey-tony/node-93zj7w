@@ -152,13 +152,18 @@ export class WorksheetTransformer extends XlsxTransformer {
             const [ startCellCoord, endCellCoord ] = child.ref.split(':');
             const startCell = new Cell( startCellCoord );
             const endCell = new Cell( endCellCoord );
-            const cellLookup = ( colIndex: number, rowIndex: number ): ICell => {
-                return rows[ rowIndex - 1 ][ colIndex - 1 ];
+            const cellLookup = ( colIndex: number, rowIndex: number ): ICell|null => {
+                const row = rows[ rowIndex - 1 ]; 
+                let col;
+                if ( row ) {
+                    col = row[ colIndex - 1 ];
+                }
+                return col || null;
             };
-            const cellContent = cellLookup( 
+            const cell = cellLookup( 
                 startCell.colNum, 
                 startCell.rowNum 
-            ).content;
+            );
 
             let result:IXlsxMergedCell = {
                 range: {
@@ -168,20 +173,26 @@ export class WorksheetTransformer extends XlsxTransformer {
                 },
                 height: null,
                 width: null,
-                content: cellContent
+                content: cell ? cell.content: ''
             }
             
             let totalWidth = 0;
             for ( let i = startCell.colNum; i < endCell.colNum; i++ ) {
                 const row = startCell.rowNum;
-                totalWidth += cellLookup( i, row ).width || 0;
+                const cell = cellLookup( i, row );
+                if ( cell && cell.width ) {
+                    totalWidth += cell.width;
+                }
             }
             result.width = totalWidth;
 
             let totalHeight = 0;
             for ( let i = startCell.rowNum; i < endCell.rowNum; i++ ) {
                 const col = startCell.colNum;
-                totalHeight += cellLookup( col, i ).height || 0;
+                const cell = cellLookup( col, i );
+                if ( cell && cell.height ) {
+                    totalHeight += cell.height;
+                }
             }
             result.height = totalHeight;
 

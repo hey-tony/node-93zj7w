@@ -125,9 +125,14 @@ class WorksheetTransformer extends transformer_factory_1.XlsxTransformer {
             const startCell = new cell_1.Cell(startCellCoord);
             const endCell = new cell_1.Cell(endCellCoord);
             const cellLookup = (colIndex, rowIndex) => {
-                return rows[rowIndex - 1][colIndex - 1];
+                const row = rows[rowIndex - 1];
+                let col;
+                if (row) {
+                    col = row[colIndex - 1];
+                }
+                return col || null;
             };
-            const cellContent = cellLookup(startCell.colNum, startCell.rowNum).content;
+            const cell = cellLookup(startCell.colNum, startCell.rowNum);
             let result = {
                 range: {
                     text: child.ref,
@@ -136,18 +141,24 @@ class WorksheetTransformer extends transformer_factory_1.XlsxTransformer {
                 },
                 height: null,
                 width: null,
-                content: cellContent
+                content: cell ? cell.content : ''
             };
             let totalWidth = 0;
             for (let i = startCell.colNum; i < endCell.colNum; i++) {
                 const row = startCell.rowNum;
-                totalWidth += cellLookup(i, row).width || 0;
+                const cell = cellLookup(i, row);
+                if (cell && cell.width) {
+                    totalWidth += cell.width;
+                }
             }
             result.width = totalWidth;
             let totalHeight = 0;
             for (let i = startCell.rowNum; i < endCell.rowNum; i++) {
                 const col = startCell.colNum;
-                totalHeight += cellLookup(col, i).height || 0;
+                const cell = cellLookup(col, i);
+                if (cell && cell.height) {
+                    totalHeight += cell.height;
+                }
             }
             result.height = totalHeight;
             return result;
