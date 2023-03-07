@@ -2,7 +2,7 @@
 
 echo "Starting application..."
 
-cd ~/projects/node-93zj7w/
+cd ~/projects/node-phebwd/
 
 rm -rf backend/node_modules
 
